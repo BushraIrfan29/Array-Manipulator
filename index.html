@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manipulator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button {
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Array Manipulator</h1>
+        <input type="text" id="arrayInput" placeholder="Enter comma-separated values (e.g., 1,2,3)" />
+        <div>
+            <button onclick="createArray()">Create Array</button>
+            <button onclick="pushValue()">Push</button>
+            <button onclick="popValue()">Pop</button>
+            <button onclick="unshiftValue()">Unshift</button>
+            <button onclick="shiftValue()">Shift</button>
+            <button onclick="spliceValue()">Splice</button>
+            <button onclick="sliceArray()">Slice</button>
+        </div>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let myArray = [];
+
+        function createArray() {
+            const input = document.getElementById('arrayInput').value;
+            myArray = input.split(',').map(item => item.trim());
+            displayResult();
+        }
+
+        function pushValue() {
+            const value = prompt("Enter value to push:");
+            if (value !== null) {
+                myArray.push(value);
+                displayResult();
+            }
+        }
+
+        function popValue() {
+            myArray.pop();
+            displayResult();
+        }
+
+        function unshiftValue() {
+            const value = prompt("Enter value to unshift:");
+            if (value !== null) {
+                myArray.unshift(value);
+                displayResult();
+            }
+        }
+
+        function shiftValue() {
+            myArray.shift();
+            displayResult();
+        }
+
+        function spliceValue() {
+            const index = prompt("Enter index to splice at:");
+            const count = prompt("Enter number of elements to remove:");
+            const newValue = prompt("Enter new value to add (leave blank to remove only):");
+            if (index !== null && count !== null) {
+                if (newValue !== null && newValue.trim() !== "") {
+                    myArray.splice(index, count, newValue);
+                } else {
+                    myArray.splice(index, count);
+                }
+                displayResult();
+            }
+        }
+
+        function sliceArray() {
+            const start = prompt("Enter start index:");
+            const end = prompt("Enter end index:");
+            const slicedArray = myArray.slice(start, end);
+            alert("Sliced Array: " + slicedArray.join(', '));
+        }
+
+        function displayResult() {
+            document.getElementById('result').innerText = "Current Array: " + myArray.join(', ');
+        }
+    </script>
+
+</body>
+</html>
